@@ -40,11 +40,19 @@ An essential developer dashboard hosting web-accessible systems-utilities, parsi
 
 ---
 
-### 🔄 [standingorders.xyz](https://standingorders.xyz/)
-A highly structured, logic-driven pipeline tool focusing on time-dependent tasks, automation sequences, and systematic cycle modeling. It strips away complex dashboard styling to focus purely on configuring raw state machines and programmatic recurrence rules.
+### 🚀 [standingorders.xyz](https://standingorders.xyz/)
+A persistent, browser-based space MMO sandbox and economy simulation built as a dedicated solo hobby project. The game features a persistent server environment where trade markets fluctuate, resource nodes deplete, and faction mechanics continuously simulate whether the player is actively logged in or away.
 
-*   **Workflow Engine:** Built around executing or visually charting deterministic, fixed routines where users can systematically plot cron-based automated scripts, trigger structures, or transaction schedules without backend execution drift.
-
+*   **The Sector & Faction Architecture:** Manages a hand-charted 15-system universe split into distinct security sectors:
+    *   *Core Worlds (Sol, Vega, Ceres):* High-security, lower-margin industrial hubs.
+    *   *The Frontier (Kepler, Helios, Tortuga):* High-yield mining systems with active pirate raiding protocols.
+    *   *The Reaches (Erebus, Styx, Nyx):* Low-security fringe sectors containing deep-space signals and scrap wrecks.
+    *   *The Blackreach (Scourge, Malice, Wraith, Blight, Ruin, Husk):* A lawless 6-system ring containing zero station authority. This acts as a high-risk loop—the only place to harvest volatile *Umbral Ore*, which must then be smuggled back to policed sectors to liquidate.
+*   **The Gameplay Loop Engines:** 
+    *   *Dynamic Commerce:* Real-time supply-and-demand market spreadsheets calculated per station.
+    *   *Space Mining:* Direct vector interaction loops utilizing directional thrusters, mining lasers, and cargo collection mechanics.
+    *   *Combat & AI Bounties:* Real-time sector threat generation tracking pirate raiders, faction police reinforcements, and localized crossfire logic.
+*   **Technical Implementation:** Engineered for zero-install deployment, running an optimized canvas-driven or low-overhead WebGL rendering pipeline optimized heavily for Chromium-based hardware acceleration.
 ---
 
 ### 🕸️ [hellasonline.xyz](https://hellasonline.xyz/)
