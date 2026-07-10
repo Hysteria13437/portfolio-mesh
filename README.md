@@ -1,15 +1,44 @@
 # Portfolio Mesh
 
-A centralized index and architectural breakdown of my active web deployments, community hubs, open hardware reference platforms, and developer utilities. 
+A centralized index and architectural breakdown of my active web deployments, community hubs, open hardware reference platforms, and browser-based multiplayer systems.
 
 ---
 
 ## 🌐 Project Catalog & Deep Dives
 
-### 💻 [vbuilds.xyz](https://vbuilds.xyz/)
-*Formerly CoreChronicle.* A fully realized, ad-free digital reference manual and parts sandbox built specifically for PC enthusiasts and system builders. It serves as a lightweight alternative to bloated retail tracking pages by prioritizing clean specifications and absolute functional clarity.
+### ⚔️ [hellasonline.xyz](https://hellasonline.xyz/)
+A persistent, text-and-map strategy MMO set in a stylized ancient Greek world. Heavily inspired by classic slow-burn web strategy games of the 2000s (Travian, Ikariam, OGame), it is explicitly designed around a strict anti-pay-to-win, zero-FOMO, ad-free philosophy with persistent progression.
 
-*   **The Component Engine:** Features an expanding database of components across 8 fundamental categories (GPUs, CPUs, Motherboards, RAM, Storage, PSUs, Coolers, Cases). It handles specific architectural breakdowns, tracking modern pipelines like AMD's Zen 5 3D V-Cache (Ryzen 7 9800X3D) and NVIDIA's Blackwell architecture (RTX 5090).
+*   **Core Systems & Gameplay Loops:** 
+    *   *Sovereignty & Production:* Players found, expand, and manage micro-economies utilizing 6 basic resource streams (Sawmill, Marble Quarry, Crystal Mine, Sulfur Pit, Vineyard, and Marketplace Gold).
+    *   *Strategic Commitment:* Features a multi-tier military structure comprising a 20+ ground unit roster alongside a separate naval branch. Movement mechanics operate on real-world hour scales, making long-distance attacks or reinforce orders deep commitments.
+    *   *Diplomatic Subdomains:* Integrates a custom community node at `forum.hellasonline.xyz` handling kingdom treaties, recruitment records, formal war declarations, and tactical post-mortems.
+*   **The Technical Architecture:**
+    *   *The Stack:* Written end-to-end in TypeScript using React on the frontend, Fastify + Prisma on the backend API layer, and PostgreSQL for structural database state.
+    *   *The Ticking Core:* Employs a robust background architecture using Redis and BullMQ to orchestrate high-concurrency, asynchronous long-running worker tasks (resource generation curves, construction queues, combat vector calculations, and real-time battle resolution). 
+    *   *Real-time Sync:* Implements Socket.io for immediate server-to-client notifications and messaging states. It runs entirely on a single unmanaged VPS hosted out of Helsinki, Finland.
+
+---
+
+### 🚀 [standingorders.xyz](https://standingorders.xyz/)
+A persistent, browser-based space MMO sandbox and economy simulation built around a living server environment. Markets fluctuate, resource nodes deplete, and faction mechanics continuously compute whether the player is actively logged in or away.
+
+*   **The Sector & Faction Architecture:** Manages a hand-charted 15-system universe split into distinct security zones:
+    *   *Core Worlds (Sol, Vega, Ceres):* High-security, lower-margin industrial hubs.
+    *   *The Frontier (Kepler, Helios, Tortuga):* High-yield mining systems with active pirate raiding protocols.
+    *   *The Reaches (Erebus, Styx, Nyx):* Low-security fringe sectors containing deep-space signals and scrap wrecks.
+    *   *The Blackreach (Scourge, Malice, Wraith, Blight, Ruin, Husk):* A lawless 6-system ring containing zero station authority. This acts as a high-risk loop—the only place to harvest volatile *Umbral Ore*, which must then be smuggled back to policed sectors to liquidate.
+*   **The Gameplay Loop Engines:** 
+    *   *Dynamic Commerce:* Real-time supply-and-demand market spreadsheets calculated per station.
+    *   *Space Mining & Combat:* Direct vector interaction loops utilizing directional thrusters, mining lasers, and cargo collection mechanics alongside real-time sector threat generation tracking pirate raiders and faction police.
+*   **Technical Implementation:** Engineered for zero-install deployment, running an optimized canvas-driven rendering pipeline optimized heavily for Chromium-based hardware acceleration.
+
+---
+
+### 💻 [vbuilds.xyz](https://vbuilds.xyz/)
+*Formerly CoreChronicle.* A zero-bloat, ad-free digital reference manual and parts sandbox built specifically for PC enthusiasts and system builders. It serves as a lightweight alternative to retail tracking pages by prioritizing clean specifications and absolute functional clarity.
+
+*   **The Component Engine:** Features an expanding database of components across 8 categories (GPUs, CPUs, Motherboards, RAM, Storage, PSUs, Coolers, Cases). It handles specific architectural breakdowns, tracking modern pipelines like AMD's Zen 5 3D V-Cache (Ryzen 7 9800X3D) and NVIDIA's Blackwell architecture (RTX 5090).
 *   **The Compatibility Checker:** A programmatic slot-by-slot configurator that cross-references physical, electrical, and structural dependencies in real-time. It actively flags socket mismatches (e.g., matching Arrow Lake to LGA1851), runs live thermal/cooling space calculations, maps form-factor limits, and tallies cumulative system power draws against target PSU efficiencies.
 *   **The Resource Hub:** Hosts a library of multi-chapter tutorials covering the entire lifecycle of hardware ownership—from initial physical assembly and structural thermal paste application to low-level BIOS navigation, memory tuning (XMP/EXPO profiles), and targeted safe overclocking.
 
@@ -40,33 +69,10 @@ An essential developer dashboard hosting web-accessible systems-utilities, parsi
 
 ---
 
-### 🚀 [standingorders.xyz](https://standingorders.xyz/)
-A persistent, browser-based space MMO sandbox and economy simulation built as a dedicated solo hobby project. The game features a persistent server environment where trade markets fluctuate, resource nodes deplete, and faction mechanics continuously simulate whether the player is actively logged in or away.
-
-*   **The Sector & Faction Architecture:** Manages a hand-charted 15-system universe split into distinct security sectors:
-    *   *Core Worlds (Sol, Vega, Ceres):* High-security, lower-margin industrial hubs.
-    *   *The Frontier (Kepler, Helios, Tortuga):* High-yield mining systems with active pirate raiding protocols.
-    *   *The Reaches (Erebus, Styx, Nyx):* Low-security fringe sectors containing deep-space signals and scrap wrecks.
-    *   *The Blackreach (Scourge, Malice, Wraith, Blight, Ruin, Husk):* A lawless 6-system ring containing zero station authority. This acts as a high-risk loop—the only place to harvest volatile *Umbral Ore*, which must then be smuggled back to policed sectors to liquidate.
-*   **The Gameplay Loop Engines:** 
-    *   *Dynamic Commerce:* Real-time supply-and-demand market spreadsheets calculated per station.
-    *   *Space Mining:* Direct vector interaction loops utilizing directional thrusters, mining lasers, and cargo collection mechanics.
-    *   *Combat & AI Bounties:* Real-time sector threat generation tracking pirate raiders, faction police reinforcements, and localized crossfire logic.
-*   **Technical Implementation:** Engineered for zero-install deployment, running an optimized canvas-driven or low-overhead WebGL rendering pipeline optimized heavily for Chromium-based hardware acceleration.
----
-
-### 🕸️ [hellasonline.xyz](https://hellasonline.xyz/)
-The core domain root and operational base of my entire hosting infrastructure footprint. It handles top-level routing, internal service clustering, and local identity mapping for a specific subset of networks.
-
-*   **Subdomain Architecture:** Acts as the primary ingress point and domain controller connecting multi-tier local private applications, project staging spaces, and community networking nodes (such as linking directly to backend assets or serving as the base network for `forum.hellasonline.xyz`).
-
----
-
-## 🛠️ Infrastructure Stack
-Most projects are built with efficiency, rapid load times, and minimalism in mind. 
-* **Frontend:** Modern JavaScript/TypeScript ecosystem (React + Vite)
-* **Hosting & Automation:** Self-hosted Linux VPS environments, containerized deployments, and lightweight static endpoints.
-* **Design Philosophy:** 100% free, tracking-free, and highly scannable UI/UX.
+## 🛡️ Privacy, Sovereignty & Design Philosophy
+*   **Absolute Data Ownership:** Fully tracking-free ecosystem. No Google Analytics, no Facebook Pixels, and no behavioral-ad SDKs. True GDPR data compliance backed by zero-retention infrastructure and immediate physical account purging on user command.
+*   **Infrastructure Minimalism:** Eschewing bloated, opaque third-party cloud tiers (AWS/GCP), the core platforms are direct-deployed to bare-metal or single virtual private environments via clean Linux systems-administration principles. 
+*   **No Pay-To-Win / Anti-FOMO:** Built entirely on the belief that software should respect a user's time and financial boundaries. Core gameplay networks feature no microtransactions, premium queues, time-gated grind cycles, or engineered artificial scarcity.
 
 ---
 *Maintained with ☕ and Linux terminals.*
