@@ -1,78 +1,194 @@
 # Portfolio Mesh
 
-A centralized index and architectural breakdown of my active web deployments, community hubs, open hardware reference platforms, and browser-based multiplayer systems.
+A centralized index and architectural breakdown of my active web deployments,
+community hubs, open hardware reference platforms, and browser-based game
+systems. Everything here is self-hosted, tracking-light, and built to keep
+running on modest hardware for years rather than quarters.
 
 ---
 
 ## 🌐 Project Catalog & Deep Dives
 
 ### ⚔️ [hellasonline.xyz](https://hellasonline.xyz/)
-A persistent, text-and-map strategy MMO set in a stylized ancient Greek world. Heavily inspired by classic slow-burn web strategy games of the 2000s (Travian, Ikariam, OGame), it is explicitly designed around a strict anti-pay-to-win, zero-FOMO, ad-free philosophy with persistent progression.
+A persistent, text-and-map strategy MMO set in a stylized ancient Greek world.
+Heavily inspired by the slow-burn web strategy games of the 2000s (Travian,
+Ikariam, OGame), it is built around a strict anti-pay-to-win, zero-FOMO,
+ad-free philosophy: permanently free, no premium queues, and no server resets
+that wipe a player's progress.
 
-*   **Core Systems & Gameplay Loops:** 
-    *   *Sovereignty & Production:* Players found, expand, and manage micro-economies utilizing 6 basic resource streams (Sawmill, Marble Quarry, Crystal Mine, Sulfur Pit, Vineyard, and Marketplace Gold).
-    *   *Strategic Commitment:* Features a multi-tier military structure comprising a 20+ ground unit roster alongside a separate naval branch. Movement mechanics operate on real-world hour scales, making long-distance attacks or reinforce orders deep commitments.
-    *   *Diplomatic Subdomains:* Integrates a custom community node at `forum.hellasonline.xyz` handling kingdom treaties, recruitment records, formal war declarations, and tactical post-mortems.
+*   **Core Systems & Gameplay Loops:**
+    *   *Sovereignty & Production:* Players found cities on islands and grow
+        micro-economies across 6 resource streams (Sawmill, Marble Quarry,
+        Crystal Mine, Sulfur Pit, Vineyard, and Marketplace Gold), with
+        research trees that modify output, military capacity, and map vision.
+    *   *Strategic Commitment:* A multi-tier military spanning a 20+ ground
+        unit roster and a separate naval branch. Movement runs on real-world
+        hour scales, so long-range attacks, colonizations, and reinforcement
+        orders are genuine commitments rather than instant actions.
+    *   *The Political Layer:* Kingdoms, territory control, menhirs, robber
+        camps, formal war declarations, and kingdom-wide votes. A custom
+        community node at `forum.hellasonline.xyz` carries treaties,
+        recruitment, and post-battle analysis.
 *   **The Technical Architecture:**
-    *   *The Stack:* Written end-to-end in TypeScript using React on the frontend, Fastify + Prisma on the backend API layer, and PostgreSQL for structural database state.
-    *   *The Ticking Core:* Employs a robust background architecture using Redis and BullMQ to orchestrate high-concurrency, asynchronous long-running worker tasks (resource generation curves, construction queues, combat vector calculations, and real-time battle resolution). 
-    *   *Real-time Sync:* Implements Socket.io for immediate server-to-client notifications and messaging states. It runs entirely on a single unmanaged VPS hosted out of Helsinki, Finland.
+    *   *The Stack:* Written end-to-end in TypeScript, React on the front end,
+        Fastify + Prisma on the API layer, PostgreSQL for durable state.
+    *   *The Ticking Core:* A background architecture on Redis and BullMQ
+        orchestrates high-concurrency asynchronous work: resource-generation
+        curves, construction and training queues, movement resolution, and
+        combat. Every economy-mutating path is transaction-guarded with row
+        locks and delta writes, hardened across repeated multi-agent security
+        and race-condition audits.
+    *   *Real-time Sync:* Socket.io pushes construction-complete, battle-report,
+        and messaging events to the client the moment a worker finishes. The
+        whole system runs on a single unmanaged VPS in Helsinki, Finland.
 
 ---
 
 ### 🚀 [standingorders.xyz](https://standingorders.xyz/)
-A persistent, browser-based space MMO sandbox and economy simulation built around a living server environment. Markets fluctuate, resource nodes deplete, and faction mechanics continuously compute whether the player is actively logged in or away.
+A persistent, browser-based space MMO sandbox and economy simulation built
+around a living server. Markets drift, asteroid belts deplete, and pirate and
+police factions keep acting whether or not the player is logged in.
 
-*   **The Sector & Faction Architecture:** Manages a hand-charted 15-system universe split into distinct security zones:
-    *   *Core Worlds (Sol, Vega, Ceres):* High-security, lower-margin industrial hubs.
-    *   *The Frontier (Kepler, Helios, Tortuga):* High-yield mining systems with active pirate raiding protocols.
-    *   *The Reaches (Erebus, Styx, Nyx):* Low-security fringe sectors containing deep-space signals and scrap wrecks.
-    *   *The Blackreach (Scourge, Malice, Wraith, Blight, Ruin, Husk):* A lawless 6-system ring containing zero station authority. This acts as a high-risk loop—the only place to harvest volatile *Umbral Ore*, which must then be smuggled back to policed sectors to liquidate.
-*   **The Gameplay Loop Engines:** 
-    *   *Dynamic Commerce:* Real-time supply-and-demand market spreadsheets calculated per station.
-    *   *Space Mining & Combat:* Direct vector interaction loops utilizing directional thrusters, mining lasers, and cargo collection mechanics alongside real-time sector threat generation tracking pirate raiders and faction police.
-*   **Technical Implementation:** Engineered for zero-install deployment, running an optimized canvas-driven rendering pipeline optimized heavily for Chromium-based hardware acceleration.
+*   **The Sector & Faction Architecture:** A hand-charted 15-system universe
+    connected by jump gates and split into security zones:
+    *   *Core Worlds (Sol, Vega, Ceres):* High-security, low-margin industrial hubs.
+    *   *The Frontier (Kepler, Helios, Tortuga):* High-yield mining systems with
+        active pirate raiding.
+    *   *The Reaches (Erebus, Styx, Nyx):* Low-security fringe sectors seeded
+        with deep-space signals and scrap wrecks.
+    *   *The Blackreach (Scourge, Malice, Wraith, Blight, Ruin, Husk):* A
+        lawless six-system ring with no station authority. It is the only place
+        to harvest volatile *Umbral Ore*, which then has to be smuggled back to
+        policed space to sell.
+*   **The Gameplay Loop Engines:**
+    *   *Dynamic Commerce:* Per-station supply-and-demand pricing that moves
+        with aggregate trade.
+    *   *Space Mining & Combat:* Direct flight with directional thrusters,
+        mining lasers, and cargo collection, against continuously generated
+        sector threats.
+*   **Technical Implementation:** Zero-install in the browser. A Vite +
+    TypeScript + Three.js client renders the sector over WebGL; a Fastify +
+    WebSocket server runs a 15 Hz authoritative tick, with the same physics
+    integrator on both ends for client-side prediction and soft server
+    reconciliation. Credits and cargo persist per pilot name.
 
 ---
 
 ### 💻 [vbuilds.xyz](https://vbuilds.xyz/)
-*Formerly CoreChronicle.* A zero-bloat, ad-free digital reference manual and parts sandbox built specifically for PC enthusiasts and system builders. It serves as a lightweight alternative to retail tracking pages by prioritizing clean specifications and absolute functional clarity.
+*Formerly CoreChronicle.* A zero-bloat, ad-free reference manual and parts
+sandbox for PC builders. It is a lightweight alternative to retail spec pages,
+prioritizing clean data and functional clarity, and is fully localized in
+five languages (English, Finnish, Hebrew, Spanish, French).
 
-*   **The Component Engine:** Features an expanding database of components across 8 categories (GPUs, CPUs, Motherboards, RAM, Storage, PSUs, Coolers, Cases). It handles specific architectural breakdowns, tracking modern pipelines like AMD's Zen 5 3D V-Cache (Ryzen 7 9800X3D) and NVIDIA's Blackwell architecture (RTX 5090).
-*   **The Compatibility Checker:** A programmatic slot-by-slot configurator that cross-references physical, electrical, and structural dependencies in real-time. It actively flags socket mismatches (e.g., matching Arrow Lake to LGA1851), runs live thermal/cooling space calculations, maps form-factor limits, and tallies cumulative system power draws against target PSU efficiencies.
-*   **The Resource Hub:** Hosts a library of multi-chapter tutorials covering the entire lifecycle of hardware ownership—from initial physical assembly and structural thermal paste application to low-level BIOS navigation, memory tuning (XMP/EXPO profiles), and targeted safe overclocking.
+*   **The Component Engine:** An expanding database across 8 categories (GPUs,
+    CPUs, Motherboards, RAM, Storage, PSUs, Coolers, Cases), with architectural
+    breakdowns that track current pipelines such as AMD's Zen 5 3D V-Cache
+    (Ryzen 7 9800X3D) and NVIDIA's Blackwell (RTX 5090).
+*   **The Compatibility Checker:** A slot-by-slot configurator that
+    cross-references physical, electrical, and thermal dependencies in real
+    time. It flags socket mismatches (for example Arrow Lake against LGA1851),
+    runs cooler-clearance and case form-factor checks, and tallies cumulative
+    system power draw against a target PSU.
+*   **The Resource Hub:** Multi-chapter tutorials covering the full lifecycle
+    of hardware ownership: physical assembly, thermal paste, BIOS navigation,
+    memory tuning (XMP/EXPO), and conservative overclocking.
 
 ---
 
 ### 🐢 [talkativeturtles.club](https://talkativeturtles.club/)
-A dedicated community discussion board engineered specifically around a high-signal, zero-algorithm ethos. It provides a sanctuary for software engineers, hobbyist hackers, hardware builders, and sysadmins to interact without corporate tracking, distraction, or artificial engagement farming.
+A community discussion board built around a high-signal, zero-algorithm ethos:
+a place for software engineers, hobbyist hackers, hardware builders, and
+sysadmins to talk shop without corporate tracking or engagement farming.
 
-*   **The Infrastructure Stack:** Powering the backend is a heavily modified, ultra-fast implementation of **MyBB**, customized via a highly efficient, text-first, responsive dark theme tailored for night-mode terminal users. It utilizes optimized asset loading and an accessible, fast-rendering archive layout.
-*   **The Technical Forums:** Structured directly around dense technical domains. It explicitly partitions communities for **Programming & Development** (debugging algorithms, version control), **Operating Systems & Linux** (shell scripting, configuration tweaks), **Microcontrollers & Electronics** (ESP32 deployments, custom PCB design, Raspberry Pi setups), and **Networking & Cybersecurity** (self-hosting infrastructure, home labs, firewalls).
+*   **The Infrastructure Stack:** A tuned MyBB install behind a text-first,
+    responsive dark theme aimed at night-mode terminal users, with optimized
+    asset loading and a fast, accessible archive layout. Self-hosted, no
+    third-party forum SaaS.
+*   **The Technical Forums:** Partitioned by dense technical domain:
+    **Programming & Development** (algorithms, debugging, version control),
+    **Operating Systems & Linux** (shell scripting, configuration),
+    **Microcontrollers & Electronics** (ESP32 deployments, custom PCBs,
+    Raspberry Pi), and **Networking & Cybersecurity** (self-hosting, home
+    labs, firewalls).
 
 ---
 
 ### 🖼️ [wallpapertrove.org](https://wallpapertrove.org/)
-A massive, high-throughput media directory and image discovery platform designed around lightning-fast content delivery. It aggregates and organizes a catalog of over 38,000 highly curated HD and 4K digital assets without restricting access behind tracking scripts or aggressive sign-up curtains.
+A high-throughput media directory and image discovery platform built around
+fast content delivery. It organizes a curated catalog of over 38,000 HD and 4K
+assets with no tracking scripts and no aggressive sign-up wall.
 
-*   **Categorization & Asset Sorting Engine:** Dynamically indexes backgrounds into 22 highly specific genres (including Cyberpunk, Steampunk, Pixel Art, Minimalist, Sci-Fi, and Surrealism). The platform automatically reads and segregates dimensions, letting visitors filter seamlessly between widescreen desktop ratios and vertical mobile viewports.
-*   **Storage & Ingestion Pipeline:** Supports secure community media uploads up to 50MB per file, ensuring lossless compressed storage formats (.jpg, .png) maintain strict quality standards with a minimum threshold of 1920x1080 resolution.
-*   **Real-Time UI Updates:** Implements an asynchronous front-end notification layer where new database entries are pushed instantly to active clients via a subtle layout banner without demanding a full browser window refresh.
+*   **Categorization & Asset Sorting Engine:** Indexes backgrounds into 22
+    specific genres (Cyberpunk, Steampunk, Pixel Art, Minimalist, Sci-Fi,
+    Surrealism, and more). The platform reads image dimensions and separates
+    widescreen desktop ratios from vertical mobile viewports so visitors can
+    filter cleanly between them.
+*   **Storage & Ingestion Pipeline:** Community uploads up to 50MB per file,
+    stored losslessly (.jpg, .png) with a minimum 1920x1080 quality threshold.
+*   **Real-Time UI Updates:** An asynchronous front-end layer pushes new
+    entries to active clients through a subtle banner, with no full-page
+    refresh.
 
 ---
 
 ### 🧰 [toolbit.online](https://toolbit.online/)
-An essential developer dashboard hosting web-accessible systems-utilities, parsing scripts, and network diagnostics modules. It serves as an on-demand toolbox for developers needing precise string manipulation, network inspection, or script verification tools without exposing local terminals to untrusted packages.
+A developer dashboard hosting web-accessible utilities, parsers, and network
+diagnostics, so you can reach for a quick tool without pulling untrusted
+packages onto a local machine. Express.js and SQLite behind account auth.
 
-*   **Web Utilities Array:** Houses standalone client-side applications providing instant output for heavy tasks like secure cron-job formatting expression checking, raw layout manipulation, and localized encoding/decoding.
-*   **Network & Automation Trackers:** Contains continuous diagnostics scripts, providing developers with reliable monitoring tools, active system metrics tracking, and live RSS feed management utilities.
+*   **Web Utilities Array:** Standalone client-side tools with instant output:
+    cron-expression building and explanation, encoding and decoding (Base64,
+    URL, JWT inspection), hashing, text and JSON manipulation, QR-code
+    generation, and a URL shortener.
+*   **Feeds & Tracking:** A built-in RSS reader, plus lightweight monitoring
+    and metrics utilities for keeping an eye on your own services.
+
+---
+
+### 🕹️ [Arcade](https://arcade.vercel.app/)
+A single static site collecting the browser games I build on the side. No
+launcher, no account, nothing to install; each game runs entirely client-side
+and saves progress to local storage on the device. Two titles are finished
+enough to sit down with, the rest are in active development and published so
+their progress is visible.
+
+*   **Playable Now:**
+    *   *Foundry of Fate:* A turn-based fantasy RPG plus city management. Run
+        one hero and one walled city day by day: staff the foundry, train an
+        army, take quests, survive the seasons. Vanilla JS, no build step, with
+        the game rules isolated in a pure engine the presentation layer only
+        reads from.
+    *   *Kebab Tycoon:* An idle tycoon. Compound a single grill into a
+        franchise through recipes, upgrades, and staff automation; it keeps
+        earning while the tab is closed.
+*   **In Development:**
+    *   *Foundry of Fate 3D:* the Foundry city rebuilt as a low-poly Three.js
+        world placed building by building, with day/night and seasons.
+    *   *NEON VOID:* a Babylon.js cyberpunk block to drive and walk around,
+        with a wanted system, pedestrians, and flying traffic.
+    *   *Brainrot Launcher:* a cabinet of 20 short arcade games behind one menu.
+    *   *Stellar Mandate:* a text and ASCII space 4X rendered in the browser
+        through xterm.js.
+*   **Technical Implementation:** Every game folder is served at its own path
+    from one static deployment on Vercel; `main` deploys on push. Uncommitted
+    work is snapshotted to a dedicated branch every few minutes with a secret
+    scan in the loop, so nothing local is ever more than one interval from
+    being backed up off-machine.
 
 ---
 
 ## 🛡️ Privacy, Sovereignty & Design Philosophy
-*   **Absolute Data Ownership:** Fully tracking-free ecosystem. No Google Analytics, no Facebook Pixels, and no behavioral-ad SDKs. True GDPR data compliance backed by zero-retention infrastructure and immediate physical account purging on user command.
-*   **Infrastructure Minimalism:** Eschewing bloated, opaque third-party cloud tiers (AWS/GCP), the core platforms are direct-deployed to bare-metal or single virtual private environments via clean Linux systems-administration principles. 
-*   **No Pay-To-Win / Anti-FOMO:** Built entirely on the belief that software should respect a user's time and financial boundaries. Core gameplay networks feature no microtransactions, premium queues, time-gated grind cycles, or engineered artificial scarcity.
+*   **Data Ownership:** No Google Analytics, no Facebook Pixels, no
+    behavioral-ad SDKs. GDPR-aligned by construction, with zero-retention
+    infrastructure and immediate account purging on request. (The Arcade uses
+    Vercel's cookieless, non-fingerprinting page-view counts and nothing else.)
+*   **Infrastructure Minimalism:** No sprawling opaque cloud tiers. The core
+    platforms are deployed directly to bare metal or single virtual private
+    servers, managed with plain Linux sysadmin practice. The static Arcade is
+    the one exception, and only because static hosting has no server to own.
+*   **No Pay-To-Win, No FOMO:** Software should respect a user's time and
+    money. No microtransactions, premium queues, time-gated grind, or
+    engineered scarcity anywhere in the catalog.
 
 ---
-*Maintained with ☕ and Linux terminals.*
+*Maintained with coffee and Linux terminals.*
