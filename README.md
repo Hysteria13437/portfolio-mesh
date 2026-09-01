@@ -145,7 +145,7 @@ packages onto a local machine. Express.js and SQLite behind account auth.
 
 ---
 
-### 🕹️ [Arcade](https://arcade.vercel.app/)
+### 🕹️ [Arcade](https://freeplay-khaki.vercel.app/)
 A single static site collecting the browser games I build on the side. No
 launcher, no account, nothing to install; each game runs entirely client-side
 and saves progress to local storage on the device. Two titles are finished
